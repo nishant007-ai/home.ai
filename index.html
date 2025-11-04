@@ -422,9 +422,4 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url; a.download = 'agrisense_sample.csv'; a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    // initialize with analysis node selected
-    showDetails('analysis');
-    // subtle initial high
+  
