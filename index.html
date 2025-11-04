@@ -261,3 +261,31 @@
     const detailsTitle = document.getElementById('d-title');
     const detailsDesc = document.getElementById('d-desc');
     const toolsMeta = document.getElementById('toolsMeta');
+    const metricsList = document.getElementById('metricsList');
+    const aiRecommender = document.getElementById('aiRecommender');
+    const skillSelect = document.getElementById('skillSelect');
+    const versionList = document.getElementById('versionList');
+    const exportBtn = document.getElementById('exportBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const suggestBtn = document.getElementById('suggestBtn');
+    const downloadCSV = document.getElementById('downloadCSV');
+
+    // populate version list initially
+    function updateVersionList(ver='v1'){
+      versionList.innerHTML = '';
+      for(const k of Object.keys(NODES)){
+        const vText = NODES[k].version[ver] || '';
+        const li = document.createElement('li');
+        li.textContent = `• ${NODES[k].title}: ${vText}`;
+        versionList.appendChild(li);
+      }
+    }
+    updateVersionList('v1');
+
+    // node click handler
+    nodeElems.forEach(ne=>{
+      ne.addEventListener('click', ()=>{
+        const key = ne.dataset.key;
+        showDetails(key);
+        highlightNode(ne);
+      });
