@@ -143,3 +143,117 @@
               <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
                 <div class="chip">Impact</div>
                 <div class="chip">Sustainability</div>
+                <div class="chip">Traceability</div>
+              </div>
+
+              <div id="d-tools" style="margin-top:8px;">
+                <strong>Recommended tools:</strong>
+                <div class="meta" id="toolsMeta" style="margin-top:8px">
+                  <!-- injected -->
+                </div>
+              </div>
+
+              <div id="d-metrics" style="margin-top:12px;">
+                <strong>Sample Metrics:</strong>
+                <div style="margin-top:8px" id="metricsList" class="small">
+                  <!-- injected -->
+                </div>
+              </div>
+
+              <div style="margin-top:10px;">
+                <strong>AI Step Recommender</strong>
+                <div class="small" id="aiRecommender" style="margin-top:6px">Choose a node + skill level to get a suggested next step.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- color mini-map -->
+          <div style="margin-top:14px;" class="card details">
+            <strong>Color Palette Suggestions</strong>
+            <div class="swatches" id="swatches">
+              <div class="swatch" style="background:linear-gradient(135deg,#1fa2ff,#12d8fa)">A</div>
+              <div class="swatch" style="background:linear-gradient(135deg,#7afcff,#b692ff)">B</div>
+              <div class="swatch" style="background:linear-gradient(135deg,#7be495,#2bb673)">C</div>
+              <div class="swatch" style="background:linear-gradient(135deg,#ffb86b,#ff8b8b)">D</div>
+            </div>
+            <div class="small" style="margin-top:10px">Use Palette C for "agriculture" branding; Palette B for analytics dashboards; Palette D for production/warning states.</div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="card details">
+            <strong>AI  Tips (quick)</strong>
+            <div class="prompt" id="promptBox">
+#  "Isometric smart farm with sensors and cloud analytics, modern blue/green palette, photorealistic"
+# StableDiffusion: "agritech dashboard UI, data visualizations, farmers interacting with tablets, clean design"
+# Analysis prompt: "Given sensor dataset [soil_moisture,temp,ndvi], predict weekly yield and irrigation schedule"
+            </div>
+
+            <div style="margin-top:12px;">
+              <strong>Version Comparison</strong>
+              <div class="small" style="margin-top:6px">Toggle Version to compare feature set:</div>
+              <ul id="versionList" class="small" style="margin-top:8px">
+                <!-- injected -->
+              </ul>
+            </div>
+
+            <div style="margin-top:12px;">
+              <strong>Export / Deliverables</strong>
+              <div class="small" style="margin-top:6px">
+                • Slide-ready PNG export (use Export PNG).<br>
+                • Exported metrics & CSV (demo) — integrate with procurement ERPs via API.<br>
+                • Suggest adding pilot results (3 farms x 2 months) in appendix.
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <strong>Admin Actions</strong>
+              <div style="margin-top:8px; display:flex; gap:8px;">
+                <button class="btn" id="suggestBtn">Get AI Suggestion</button>
+                <button class="btn secondary" id="downloadCSV">Download CSV (demo)</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer style="margin-top:14px; text-align:center; color:var(--muted); font-size:13px">
+      Tip: Click nodes to open detailed guidance. Use the skill slider to change the AI Recommendations (Beginner—Expert).
+    </footer>
+  </div>
+
+  <script>
+    // Data definitions for each node
+    const NODES = {
+      farm: {
+        title: 'Farm',
+        desc: 'On-field teams, tractors, crop plots. Sensors (soil moisture, temperature), drones for NDVI, and mobile apps for farmer inputs.',
+        tools: ['LoRa sensors (e.g., Dragino)', 'Mobile app (Android/iOS)', 'Drones (NDVI imagery)'],
+        metrics: ['Soil moisture (%)','NDVI index','Growth stage','Harvest estimate (kg)'],
+        version: { v1:'Manual sensors + mobile logging', v2:'Drone imagery + automated soil probes' }
+      },
+      capture: {
+        title: 'Data Capture',
+        desc: 'Edge gateways collect telemetry, pre-process and forward to cloud. Use secure comms (TLS) and batching to optimize bandwidth.',
+        tools: ['Edge Gateway (Raspberry Pi)', 'MQTT / LoRaWAN', 'Preprocessing pipeline (JSON->Parquet)'],
+        metrics: ['Message latency (ms)','Data completeness (%)','Packet loss (%)'],
+        version: { v1:'MQTT ingestion', v2:'MQTT + edge aggregation + OTA updates' }
+      },
+      analysis: {
+        title: 'AgriSense.AI',
+        desc: 'Cloud-hosted ML models — yield prediction, irrigation optimizer, anomaly detection and quality scoring for procurement decisions.',
+        tools: ['AWS/GCP/Azure', 'Model: RandomForest / LSTM', 'Dashboard: React + Plotly'],
+        metrics: ['Yield prediction error (%)','Water saving (%)','Time to decision (hours)'],
+        version: { v1:'Basic ML models + dashboard', v2:'AutoML + supply chain integration + API for procurement' }
+      },
+      production: {
+        title: 'Production',
+        desc: 'FMCG procurement teams consume insights for sourcing schedules, dynamic pricing, and production planning (e.g., pigment sourcing).',
+        tools: ['Procurement ERP (SAP/Oracle)', 'Supplier portal', 'Quality inspection integration'],
+        metrics: ['Procurement cost variance (%)','On-time delivery (%)','Quality acceptance rate (%)'],
+        version: { v1:'Manual procurement updates', v2:'Automated S2P pipeline with supplier scoring' }
+      }
+    };
+
